@@ -1,0 +1,63 @@
+---
+title: "project-1"
+format: html
+author: Anish Talla
+execute: 
+  echo: false
+---
+
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(palmerpenguins)
+```
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+
+# Custom color palette
+penguin_colors <- c("Adelie" = "#FF8C00", 
+                    "Chinstrap" = "#9932CC", 
+                    "Gentoo" = "#008B8B")
+
+# Create the plot
+ggplot(penguins %>% drop_na(), 
+       aes(x = bill_length_mm, 
+           y = flipper_length_mm,
+           color = species,
+           shape = sex)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.5) +
+  scale_color_manual(values = penguin_colors) +
+  scale_shape_manual(values = c(16, 17), na.translate = FALSE) +
+  labs(
+    title = "Penguin Bill Length vs. Flipper Length",
+    subtitle = "Gentoo penguins have the strongest size correlation",
+    x = "Bill Length (mm)",
+    y = "Flipper Length (mm)",
+    color = "Species",
+    shape = "Sex",
+    caption = "Data from palmerpenguins package | Visualization by Anish Talla"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18, hjust = 0.5),
+    plot.subtitle = element_text(size = 12, hjust = 0.5, color = "gray30"),
+    legend.position = "bottom",
+    legend.box = "horizontal",
+    panel.grid.minor = element_blank(),
+    plot.background = element_rect(fill = "white", color = NA),
+    plot.margin = margin(20, 20, 20, 20)
+  ) +
+  facet_wrap(~island, ncol = 3) +
+  guides(
+    color = guide_legend(title.position = "top"),
+    shape = guide_legend(title.position = "top")
+  )
+```
+
+
+
+
+

@@ -4,3 +4,9 @@ format: html
 author: Anish Talla
 ---
 
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+
